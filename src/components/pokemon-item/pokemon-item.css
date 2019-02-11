@@ -1,0 +1,42 @@
+:root {
+  --back-color: rgb(191, 189, 206);
+  --text-color: #000;
+}
+
+.pokemon-item {
+  width: 140px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: rgb(81, 178, 216, 0.1);
+}
+
+.card-body {
+  margin: 0 auto;
+}
+
+.pokemon-item:hover {
+  cursor: pointer;
+  --back-color: rgba(223, 84, 84, 0.6);
+  --text-color: rgba(255, 67, 9, 1);
+  box-shadow: 2px 2px 1px rgba(226, 161, 141, 0.4);
+}
+
+.item-image {
+  background-color: var(--back-color);
+  border: none;
+  border-radius: 5px;
+}
+
+.card-title {
+  text-align: center;
+  color: var(--text-color);
+  font-weight: bold;
+}
+
+.not-found {
+  border: none;
+  border-radius: 3px;
+}

@@ -1,0 +1,23 @@
+.pokemon-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  width: 680px;
+  height: 780px;
+
+  padding: 20px;
+  padding-left: 30px;
+
+  border-radius: 5px;
+
+  background-color: #EEEEEE;
+
+  direction:rtl;
+  overflow: scroll;
+}
+
+.pokemon-list__title {
+  color: rgb(231, 137, 137);
+  font-size: 34px;
+}
