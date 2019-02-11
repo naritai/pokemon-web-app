@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import PokemonList from '../pokemon-list';
-import PokemonDetails from '../pokemon-details';
-import SearchPanel from '../search-panel';
+import React, { Component } from 'react'
+import PokemonList from '../pokemon-list'
+import PokemonDetails from '../pokemon-details'
+import SearchPanel from '../search-panel'
 
-import './pokemons-page.css';
+import './pokemons-page.css'
 
 export default class PokemonsPage extends Component {
   state = {
@@ -11,27 +11,28 @@ export default class PokemonsPage extends Component {
     selectedPokemon: null
   }
 
-  onSearchChange = (query) => {
-    this.setState({ pokemonSearchQuery: query });
+  onSearchChange = query => {
+    this.setState({ pokemonSearchQuery: query })
   }
 
-  onPokemonSelected = (name) => {
+  onPokemonSelected = name => {
     this.setState({ selectedPokemon: name })
   }
 
-  render() {
-    const { pokemonSearchQuery, selectedPokemon } = this.state;
+  render () {
+    const { pokemonSearchQuery, selectedPokemon } = this.state
 
     return (
       <div>
-        <SearchPanel onSearchChange={ this.onSearchChange } />
+        <SearchPanel onSearchChange={this.onSearchChange} />
 
-        <div className="container">
-          <PokemonList 
-            onPokemonSelected={ this.onPokemonSelected } 
-            term={ pokemonSearchQuery } />
+        <div className='container'>
+          <PokemonList
+            onPokemonSelected={this.onPokemonSelected}
+            term={pokemonSearchQuery}
+          />
 
-          <PokemonDetails name={ selectedPokemon } />
+          <PokemonDetails name={selectedPokemon} />
         </div>
       </div>
     )

@@ -1,3 +1,3 @@
-import PokemonsPage from './pokemons-page';
+import PokemonsPage from './pokemons-page'
 
-export default PokemonsPage;
+export default PokemonsPage

@@ -1,3 +1,3 @@
-import LoaderIndicatorSmall from './loader-indicator-small';
+import LoaderIndicatorSmall from './loader-indicator-small'
 
-export default LoaderIndicatorSmall;
+export default LoaderIndicatorSmall
