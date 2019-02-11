@@ -26,7 +26,7 @@ export default class PokemonsPage extends Component {
       <div>
         <SearchPanel onSearchChange={this.onSearchChange} />
 
-        <div className='container'>
+        <div className='containerz'>
           <PokemonList
             onPokemonSelected={this.onPokemonSelected}
             term={pokemonSearchQuery}
