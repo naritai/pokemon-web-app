@@ -64,24 +64,24 @@ export default class PokemonDetails extends Component {
 
       details = (
         <div className="custom-card">
-            <div className="custom-title-wrapper">
-              <span className="id">#{ id } </span>
-              <h3 className="custom-title">{ uppercase }</h3>
-            </div>
-            
-            <div className="characteristic">
-              <p className="height">Height: <span>{ height }</span> cm.</p>
-              <p className="weight">Weight: <span>{ weight }</span> kg.</p>
-              <p className="experience">Base experience: <span>{ experience }</span> </p>
-            </div>
+          <div className="custom-title-wrapper">
+            <span className="id">#{ id } </span>
+            <h3 className="custom-title">{ uppercase }</h3>
+          </div>
+          
+          <div className="characteristic">
+            <p className="height">Height: <span>{ height }</span> cm.</p>
+            <p className="weight">Weight: <span>{ weight }</span> kg.</p>
+            <p className="experience">Base experience: <span>{ experience }</span> </p>
+          </div>
 
-            <div className="evolution-title"><span>Evolves to:</span></div>
+          <div className="evolution-title"><span>Evolves to:</span></div>
 
-            <div className="evolution">
-              <img className="image" src={image} alt={uppercase} height="120px" width="120px" />
-              <div class="arrow"></div>
-              { nextGeneration }
-            </div>
+          <div className="evolution">
+            <img className="image" src={image} alt={uppercase} height="120px" width="120px" />
+            <div class="arrow"></div>
+            { nextGeneration }
+          </div>
         </div>
       )
     }

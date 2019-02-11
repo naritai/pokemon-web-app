@@ -1,0 +1,19 @@
+.index-page {
+
+  min-height: 400px;
+  padding: 20px;
+
+  border-radius: 5px;
+  background-color: rgb(85, 104, 122);
+}
+
+.main-title {
+  font-size: 56px;
+  color: #FFECDB;
+  font-weight: 600;
+}
+
+.index-page p {
+  font-size: 18px;
+  color: #FFECDB;
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PokemonService from '../../services/poke-api';
-import AbilityItemDetails from '../abiliti-item-details';
+import AbilityItemDetails from '../ability-item-details';
 import LoaderIndicator from '../loader-indicator';
 
 import './abilities-list.css';

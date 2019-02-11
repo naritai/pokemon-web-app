@@ -1,44 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { IndexPage, AboutPage } from '../pages';
 import Header from '../header';
-import PokemonList from '../pokemon-list';
-import SearchPanel from '../search-panel';
-import PokemonDetails from '../pokemon-details';
 import AbilitiesList from '../abilities-list';
+import PokemonsPage from '../pokemons-page';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './app.css';
 
-export default class App extends Component {
-  state = {
-    pokemonSearchQuery: '',
-    selectedPokemon: null
-  }
-
-  onSearchChange = (query) => {
-    this.setState({ pokemonSearchQuery: query });
-  }
-
-  onPokemonSelected = (name) => {
-    this.setState({ selectedPokemon: name })
-  }
-
-  render() {
-    const { pokemonSearchQuery, selectedPokemon } = this.state;
-    
-    return (
+const App = () => {
+  return (
+    <Router>
       <div className="app">
         <Header />
-        
-        <SearchPanel onSearchChange={ this.onSearchChange } />
 
-        <div className="container">
-          <PokemonList onPokemonSelected={ this.onPokemonSelected } 
-                       term={ pokemonSearchQuery } />
+        <Route path="/" component={ IndexPage } exact />
+        <Route path="/pokemons" component={ PokemonsPage } />
+        <Route path="/pokemons/:id" component={ PokemonsPage } exact />
 
-            <PokemonDetails name={ selectedPokemon } />
-        </div>
-
-        <AbilitiesList />
+        <Route path="/abilities" component={ AbilitiesList } />
+        <Route path="/about" component={ AboutPage } />
+    
       </div>
-    )
-  }
+    </Router>
+  )
 }
+
+export default App;
