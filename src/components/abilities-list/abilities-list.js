@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import PokemonService from '../../services/poke-api'
-import AbilityItemDetails from '../ability-item-details'
-import LoaderIndicator from '../loader-indicator'
+import React, { Component } from 'react';
+import PokemonService from '../../services/poke-api';
+import AbilityItemDetails from '../ability-item-details';
+import LoaderIndicator from '../loader-indicator';
 
-import './abilities-list.css'
+import './abilities-list.css';
 
 export default class AbilitiesList extends Component {
   pokemonService = new PokemonService()
@@ -11,27 +11,27 @@ export default class AbilitiesList extends Component {
   state = {
     abilities: null,
     loading: true,
-    error: false
+    error: false,
   }
 
-  componentDidMount () {
-    this.updateAbilitiesList()
+  componentDidMount() {
+    this.updateAbilitiesList();
   }
 
-  onError () {
-    this.setState({ error: true })
+  onError() {
+    this.setState({ error: true });
   }
 
   updateAbilitiesList = () => {
     this.pokemonService
       .getAbilitiesNamesList()
-      .then(abilities => {
-        this.setState({ abilities, loading: false })
+      .then((abilities) => {
+        this.setState({ abilities, loading: false });
       })
-      .catch(this.onError)
+      .catch(this.onError);
   }
 
-  renderItems (items) {
+  renderItems(items) {
     return items.map(({ abilityName, description }) => (
       <li key={abilityName}>
         <AbilityItemDetails
@@ -39,26 +39,26 @@ export default class AbilitiesList extends Component {
           description={description}
         />
       </li>
-    ))
+    ));
   }
 
-  render () {
-    const { abilities, loading, error } = this.state
-    let errorMessage = error ? <span>Something went wrong, sorry</span> : null
-    let loadingSpinner = loading ? <LoaderIndicator /> : null
+  render() {
+    const { abilities, loading, error } = this.state;
+    const errorMessage = error ? <span>Something went wrong, sorry</span> : null;
+    const loadingSpinner = loading ? <LoaderIndicator /> : null;
 
-    let elements = null
+    let elements = null;
 
     if (abilities) {
-      elements = this.renderItems(abilities)
+      elements = this.renderItems(abilities);
     }
 
     return (
-      <div className='abilities-list'>
+      <div className="abilities-list">
         {loadingSpinner}
         {errorMessage}
-        <ul className='abilities-items'>{elements}</ul>
+        <ul className="abilities-items">{elements}</ul>
       </div>
-    )
+    );
   }
 }

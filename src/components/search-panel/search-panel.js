@@ -1,31 +1,31 @@
-import React, { Component } from 'react'
-import './search-panel.css'
+import React, { Component } from 'react';
+import './search-panel.css';
 
 export default class SearchPanel extends Component {
   state = {
-    term: ''
+    term: '',
   }
 
-  searchItems = event => {
-    const newQuery = event.target.value.toLowerCase()
-    this.setState({ term: newQuery })
-    this.props.onSearchChange(newQuery)
+  searchItems = (event) => {
+    const newQuery = event.target.value.toLowerCase();
+    this.setState({ term: newQuery });
+    this.props.onSearchChange(newQuery);
   }
 
-  render () {
+  render() {
     return (
-      <div className='search-panel'>
+      <div className="search-panel">
         <input
-          type='text'
-          placeholder='Search for Pokemon'
+          type="text"
+          placeholder="Search for Pokemon"
           value={this.state.term}
           onChange={this.searchItems}
         />
 
-        <span className='icon-wrapper'>
-          <i className='icon fa fa-search' />
+        <span className="icon-wrapper">
+          <i className="icon fa fa-search" />
         </span>
       </div>
-    )
+    );
   }
 }

@@ -1,4 +1,4 @@
-import IndexPage from './index-page'
-import AboutPage from './about-page'
+import IndexPage from './index-page';
+import AboutPage from './about-page';
 
-export { IndexPage, AboutPage }
+export { IndexPage, AboutPage };

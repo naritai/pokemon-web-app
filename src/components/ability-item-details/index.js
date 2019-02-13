@@ -1,3 +1,3 @@
-import AbilityItemDetails from './ability-item-details'
+import AbilityItemDetails from './ability-item-details';
 
-export default AbilityItemDetails
+export default AbilityItemDetails;

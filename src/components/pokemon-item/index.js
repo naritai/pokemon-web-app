@@ -1,3 +1,3 @@
-import PokemonItem from './pokemon-item'
+import PokemonItem from './pokemon-item';
 
-export default PokemonItem
+export default PokemonItem;

@@ -1,3 +1,3 @@
-import AbilitiesList from './abilities-list'
+import AbilitiesList from './abilities-list';
 
-export default AbilitiesList
+export default AbilitiesList;
