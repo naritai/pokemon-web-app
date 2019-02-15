@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PokemonService from '../../services/poke-api';
-import LoaderIndicatorSmall from '../loader-indicator-small';
+import PokemonService from '../../../services/poke-api';
+import LoaderIndicatorSmall from '../../spinners/loader-indicator-small';
 
 import './pokemon-details.css';
 import noneImage from './none.png';

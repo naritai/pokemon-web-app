@@ -1,8 +1,8 @@
 import React from 'react';
-import './style.css';
+import './page-about.css';
 
-const AboutPage = () => (
-  <div className="index-page">
+const PageAbout = () => (
+  <div className="about-page">
     <h2 className="main-title">Hooray!</h2>
     <p>
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis
@@ -13,4 +13,4 @@ const AboutPage = () => (
   </div>
 );
 
-export default AboutPage;
+export default PageAbout;

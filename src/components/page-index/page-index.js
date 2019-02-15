@@ -1,8 +1,8 @@
 import React from 'react';
-import './style.css';
+import './page-index.css';
 
-const IndexPage = () => (
-  <div className="index-page">
+const PageIndex = () => (
+  <div className="page-index">
     <h1 className="main-title">Hello there!</h1>
     <p>
         The name Pokémon is the romanized contraction of the Japanese brand
@@ -25,4 +25,4 @@ const IndexPage = () => (
   </div>
 );
 
-export default IndexPage;
+export default PageIndex;

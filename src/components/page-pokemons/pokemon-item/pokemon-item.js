@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PokemonService from '../../services/poke-api';
-import LoaderIndicatorSmall from '../loader-indicator-small';
+import PokemonService from '../../../services/poke-api';
+import LoaderIndicatorSmall from '../../spinners/loader-indicator-small';
 
 import './pokemon-item.css';
 import imageNotFound from './not-found.png';
@@ -28,20 +28,20 @@ export default class PokemonItem extends Component {
 
   uploadPokemonImage = () => {
     this.pokemonService
-      .getPokemonImage(this.props.name)
+      .getPokemonImage(this.props.options.name)
       .then(data => this.onImageLoaded(data))
       .catch(this.onError);
   }
 
   render() {
-    const { name } = this.props;
+    const { options } = this.props;
     const { image, loading } = this.state;
 
     const picture = image ? (
       <img
         className="item-image"
         src={image}
-        alt={name}
+        alt={options}
         width="95px"
         height="90px"
       />
@@ -62,7 +62,7 @@ export default class PokemonItem extends Component {
         {spinner}
         <div className="card">
           <div className="card-body">
-            <h5 className="card-title">{name}</h5>
+            <h5 className="card-title">{options.name}</h5>
             {picture}
           </div>
         </div>

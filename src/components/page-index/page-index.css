@@ -1,4 +1,4 @@
-.index-page {
+.page-index {
 
   min-height: 400px;
   padding: 20px;
@@ -13,7 +13,7 @@
   font-weight: 600;
 }
 
-.index-page p {
+.page-index p {
   font-size: 18px;
   color: #FFECDB;
 }

@@ -17,7 +17,7 @@ export default class SearchPanel extends Component {
       <div className="search-panel">
         <input
           type="text"
-          placeholder="Search for Pokemon"
+          placeholder="Start typing here..."
           value={this.state.term}
           onChange={this.searchItems}
         />

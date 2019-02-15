@@ -149,11 +149,11 @@ export default class PokemonService {
     return result;
   }
 
-  getAbilityDetail = async (name) => {
-    const data = await this.getResourse(`/ability/${name}`);
+  getAbilityDetail = async (abilityName) => {
+    const data = await this.getResourse(`/ability/${abilityName}`);
 
     const description = data.effect_entries[0].effect;
-    const abilityName = data.name;
-    return { description, abilityName };
+    const name = data.name;
+    return { description, name };
   }
 }

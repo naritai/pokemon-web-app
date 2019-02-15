@@ -1,4 +1,4 @@
-.pokemon-list {
+.item-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -15,9 +15,4 @@
 
   direction:rtl;
   overflow: scroll;
-}
-
-.pokemon-list__title {
-  color: rgb(231, 137, 137);
-  font-size: 34px;
 }
