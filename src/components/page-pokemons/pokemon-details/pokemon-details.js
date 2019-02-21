@@ -15,6 +15,10 @@ export default class PokemonDetails extends Component {
     defaultTitle: true,
   }
 
+  componentDidMount() {
+    this.updatePokemon();
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.name !== this.props.name) {
       this.setState({ loading: true });
@@ -41,9 +45,6 @@ export default class PokemonDetails extends Component {
       .catch(() => this.onError);
   }
 
-  didComponentMount() {
-    this.updatePokemon();
-  }
 
   render() {
     const { pokemon, loading, defaultTitle } = this.state;

@@ -1,3 +1,5 @@
+/* eslint react/no-multi-comp: 0 */
+
 import React, { Component } from 'react';
 import PokemonDetails from './pokemon-details';
 import GeneralItemList from '../general-item-list';
@@ -37,8 +39,8 @@ export default class PagePokemons extends Component {
       <div>
         <SearchPanel onSearchChange={this.onSearchChange} />
 
-        <div className="containerz">
 
+        <div className="containerz">
           <GeneralItemList
             getData={this.pokemonService.getPokemonsList}
             Item={PokemonItem}
