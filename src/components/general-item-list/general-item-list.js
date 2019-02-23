@@ -1,78 +1,66 @@
-import React, { Component } from 'react';
-import LoaderIndicator from '../spinners/loader-indicator';
+/* eslint react/no-multi-comp: 0 */
+/* eslint react/prop-types: 0 */
+
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { PokemonApiConsumer } from '../poke-api-context';
+import PokemonService from '../../services/poke-api';
+import { withData } from '../hoc-helpers';
 import './general-item-list.css';
 
-export default class GeneralItemList extends Component {
-  state = {
-    itemList: null,
-    error: false,
-    loading: true,
-    searchQuery: '',
-  }
+const GeneralItemList = ({ searchQuery, data,
+  renderItem, Item, history, match }) => {
 
-  componentDidMount() {
-    this.updateList();
-  }
-
-  onListLoaded = (itemList) => {
-    this.setState({ itemList, loading: false });
-  }
-
-  onError() {
-    this.setState({ error: true });
-  }
-
-  updateList() {
-    const { getData } = this.props;
-
-    getData()
-      .then(itemList => this.onListLoaded(itemList))
-      .catch(this.onError);
-  }
-
-  search(items, query) {
+  const search = (items, query) => {
     if (query === '') return items;
-
     return items.filter(item => item.name.indexOf(query) !== -1);
-  }
+  };
 
-  onItemSelected = (name) => {
-    const { itemSelected } = this.props;
-    itemSelected(name);
-  }
+  const onItemSelected = (name) => {
+    history.push(name);
+  };
 
-  renderItems(itemList) {
-    const { searchQuery } = this.props;
-
-    return this.search(itemList, searchQuery).map((item) => {
-      const { renderItem, Item } = this.props;
+  const renderElements = () => {
+    const elements = search(data, searchQuery).map((item) => {
       const options = renderItem(item);
 
+      // Test Context API
       return (
-        <li key={options.name} onClick={() => this.onItemSelected(options.name)}>
-          <Item options={options} />
+        <li key={options.name}
+            // при клике добавить к URL имя покемона, которое получит из URL компонент PokemonDetails
+            onClick={() => onItemSelected(options.name)}>
+          <PokemonApiConsumer>
+            {
+              (pokeApi) => {
+                return (
+                  <Item options={options} getData={pokeApi.getPokemonImage}/>
+                )
+              }
+            }
+          </PokemonApiConsumer>
         </li>
       );
     });
-  }
 
-  render() {
-    const { itemList, loading } = this.state;
-    const spinner = loading ? <LoaderIndicator /> : null;
+    return elements;
+  };
 
-    let elements;
-
-    if (itemList) elements = this.renderItems(itemList);
-
-    return (
+  return (
+    <div>
       <div>
-        <div>
-          <ul className="item-list">
-            {spinner}
-            {elements}
-          </ul>
-        </div>
+        <ul className="item-list">
+          {data ? renderElements() : null}
+        </ul>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+// Test Default Props
+GeneralItemList.defaultProps = {
+  itemSelected: () => console.log('Hello there!'),
+};
+
+const { getPokemonsList } = new PokemonService();
+
+export default withData(withRouter(GeneralItemList), getPokemonsList);

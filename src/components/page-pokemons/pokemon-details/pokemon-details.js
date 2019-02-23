@@ -1,18 +1,22 @@
+/* eslint jsx-a11y/alt-text: 0 */
+
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import PokemonService from '../../../services/poke-api';
 import LoaderIndicatorSmall from '../../spinners/loader-indicator-small';
-
-import './pokemon-details.css';
 import noneImage from './none.png';
+import './pokemon-details.css';
 
 export default class PokemonDetails extends Component {
+  static propTypes = {
+    name: PropTypes.string,
+  };
+
   pokemonService = new PokemonService()
 
   state = {
     pokemon: null,
     loading: false,
-    hasError: false,
-    defaultTitle: true,
   }
 
   componentDidMount() {
@@ -21,119 +25,59 @@ export default class PokemonDetails extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.name !== this.props.name) {
-      this.setState({ loading: true });
       this.updatePokemon();
     }
   }
 
-  onError() {
-    this.setState({ hasError: true, loading: false });
-  }
-
   updatePokemon = () => {
     const { name } = this.props;
-    if (!name) {
-      return;
-    }
+    if (!name) return;
 
+    this.setState({ loading: true });
     this.pokemonService
       .getPokemonDetails(name)
       .then((pokemon) => {
-        console.log(pokemon);
-        this.setState({ pokemon, loading: false, defaultTitle: false });
-      })
-      .catch(() => this.onError);
+        this.setState({ pokemon, loading: false });
+      });
   }
 
-
   render() {
-    const { pokemon, loading, defaultTitle } = this.state;
-    const loadingIndicator = loading ? <LoaderIndicatorSmall /> : null;
-    const defTitle = defaultTitle
-      ? (<p className="default-title">Choose your pokemon to see details!</p>) : null;
+    const { pokemon, loading } = this.state;
+    const load = loading ? <LoaderIndicatorSmall /> : null;
 
-    let details = null;
-    if (pokemon) {
-      const {
-        experience, height, weight, id, name, image, evolves,
-      } = pokemon;
-      const uppercase = name.charAt(0).toUpperCase() + name.slice(1);
+    if (!pokemon) return null;
 
-      const nextGeneration = evolves
-        ? (
-          <img
-            className="image"
-            src={evolves[1]}
-            alt={evolves[0]}
-            height="120px"
-            width="120px"
-          />
-        )
-        : (
-          <img
-            className="image"
-            src={noneImage}
-            alt="Not evolves"
-            height="120px"
-            width="120px"
-          />
-        );
+    const {
+      height, weight, name, image, evolves,
+    } = pokemon;
 
-      details = (
-        <div className="custom-card">
-          <div className="custom-title-wrapper">
-            <span className="id">
-              #
-              {id}
-            </span>
-            <h3 className="custom-title">{uppercase}</h3>
-          </div>
+    const evolvesInto = (
+      <img
+        className="image"
+        src={evolves ? evolves[1] : noneImage}
+        height="120px"
+        width="120px"
+      />
+    );
 
-          <div className="characteristic">
-            <p className="height">
-              Height:
-              <span>{height}</span>
-              cm.
-            </p>
-            <p className="weight">
-              Weight:
-              <span>{weight}</span>
-              kg.
-            </p>
-            <p className="experience">
-              Base experience:
-              <span>{experience}</span>
-            </p>
-          </div>
-
-          <div className="evolution-title">
-            <span>Evolves to:</span>
-          </div>
-
-          <div className="evolution">
-            <img
-              className="image"
-              src={image}
-              alt={uppercase}
-              height="120px"
-              width="120px"
-            />
-
-            <div className="arrow" />
-            {nextGeneration}
-          </div>
-        </div>
-      );
-    }
-
-    if (loadingIndicator !== null) details = null;
 
     return (
       <div className="pokemon-details">
-        {defTitle}
-        {loadingIndicator}
-        {details}
+        {load}
+        <div>
+          <ul>
+            <li>
+              {
+                React.Children.map(this.props.children, (child) => {
+                  return React.cloneElement(child, { pokemon });
+                })
+              }
+            </li>
+          </ul>
+          <img className="image" src={image} height="120px" width="120px" />
+        </div>
+        {evolvesInto}
       </div>
     );
   }
-}
+};

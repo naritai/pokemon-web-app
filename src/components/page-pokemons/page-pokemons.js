@@ -1,24 +1,18 @@
 /* eslint react/no-multi-comp: 0 */
 
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PokemonDetails from './pokemon-details';
+import Record from './record';
 import GeneralItemList from '../general-item-list';
 import PokemonItem from './pokemon-item';
-import PokemonService from '../../services/poke-api';
 import SearchPanel from '../search-panel';
 
 import './page-pokemons.css';
 
-export default class PagePokemons extends Component {
-  pokemonService = new PokemonService();
-
+class PagePokemons extends Component {
   state = {
-    selectedPokemon: null,
     searchQuery: '',
-  }
-
-  onPokemonSelected = (name) => {
-    this.setState({ selectedPokemon: name });
   }
 
   onSearchChange = (query) => {
@@ -32,26 +26,30 @@ export default class PagePokemons extends Component {
   }
 
   render() {
-    const { selectedPokemon, searchQuery } = this.state;
-    const { onPokemonSelected } = this;
+    const { searchQuery } = this.state;
+    const { match } = this.props;
+    const { id } = match.params;
 
     return (
       <div>
         <SearchPanel onSearchChange={this.onSearchChange} />
 
-
         <div className="containerz">
           <GeneralItemList
-            getData={this.pokemonService.getPokemonsList}
             Item={PokemonItem}
             renderItem={this.renderPokemons}
             searchQuery={searchQuery}
-            itemSelected={onPokemonSelected}
           />
 
-          <PokemonDetails name={selectedPokemon} />
+          <PokemonDetails name={id}>
+            <Record field="name" label="Name" />
+            <Record field="weight" label="Weight" />
+            <Record field="height" label="Height" />
+          </PokemonDetails>
         </div>
       </div>
     );
   }
 }
+
+export default withRouter(PagePokemons);

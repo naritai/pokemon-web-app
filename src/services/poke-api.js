@@ -1,55 +1,10 @@
 export default class PokemonService {
   _apiBase = 'https://pokeapi.co/api/v2'
 
-  fakeData = [
-    {
-      name: 'ivysaur',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/2.png',
-    },
-    {
-      name: 'venusaur',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/3.png',
-    },
-    {
-      name: 'charmander',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/4.png',
-    },
-    {
-      name: 'charmeleon',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/5.png',
-    },
-    {
-      name: 'charizard',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/6.png',
-    },
-    {
-      name: 'squirtle',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/7.png',
-    },
-    {
-      name: 'wartortle',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/8.png',
-    },
-    {
-      name: 'blastoise',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/9.png',
-    },
-    {
-      name: 'caterpie',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/10.png',
-    },
-    {
-      name: 'metapod',
-      image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/11.png',
-    },
-  ]
-
   _extractId(url) {
     const idRegExp = /\/([0-9]*)\/$/;
     return url.match(idRegExp)[1];
   }
-
-  getFakeData = () => this.fakeData
 
   getResourse = async (url) => {
     const res = await fetch(`${this._apiBase}${url}`);
@@ -131,29 +86,5 @@ export default class PokemonService {
       }
     }
     return evolutionChain;
-  }
-
-  getAbilitiesNamesList = async () => {
-    const data = await this.getResourse('/ability/?limit=70');
-    const abilitiesNames = [];
-    const result = [];
-
-    for (const item of data.results) {
-      abilitiesNames.push(item.name);
-    }
-
-    for (let i = 0; i < abilitiesNames.length; i += 1) {
-      result[i] = await this.getAbilityDetail(abilitiesNames[i]);
-    }
-
-    return result;
-  }
-
-  getAbilityDetail = async (abilityName) => {
-    const data = await this.getResourse(`/ability/${abilityName}`);
-
-    const description = data.effect_entries[0].effect;
-    const name = data.name;
-    return { description, name };
   }
 }

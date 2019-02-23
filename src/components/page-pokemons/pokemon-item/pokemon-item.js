@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import PokemonService from '../../../services/poke-api';
 import LoaderIndicatorSmall from '../../spinners/loader-indicator-small';
 
 import './pokemon-item.css';
 import imageNotFound from './not-found.png';
 
 export default class PokemonItem extends Component {
-  pokemonService = new PokemonService()
-
   state = {
     image: null,
     loading: true,
-    error: false,
   }
 
   componentDidMount() {
@@ -23,12 +19,11 @@ export default class PokemonItem extends Component {
   }
 
   onError = () => {
-    this.setState({ error: true, loading: false });
+    this.setState({ loading: false });
   }
 
   uploadPokemonImage = () => {
-    this.pokemonService
-      .getPokemonImage(this.props.options.name)
+    this.props.getData(this.props.options.name)
       .then(data => this.onImageLoaded(data))
       .catch(this.onError);
   }
